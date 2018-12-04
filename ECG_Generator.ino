@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 
-const int NUM_GENERATED_SIGNALS = 1;
+const int NUM_GENERATED_SIGNALS = 3;
 int doomsday_counter = 0;
 const int DOOMSDAY = 50;
 
@@ -26,7 +26,7 @@ const int MAX_MEM = 3000;
 
 //SERVER VARIABLES
 
-const String SERVER_URL = "192.168.228.87/samples";
+const String SERVER_URL = "/samples";
 String host = "192.168.228.87";
 
 const int port = 3000;
@@ -91,8 +91,8 @@ void upload_ramp_signal()
      }
      if(send_counter == MAX_MEM)
      {
-        //GET(buffer_, "false");
-        POST(buffer_, "false");
+        GET(buffer_, "false");
+        //POST(buffer_, "false");
         buffer_ = "";
         send_counter = 0;
      }
@@ -102,8 +102,8 @@ void upload_ramp_signal()
         yield();
      }
   }
-    POST(buffer_, "true");
-    //GET(buffer_, "true");
+    //POST(buffer_, "true");
+    GET(buffer_, "true");
 }
 
 
