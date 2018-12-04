@@ -26,7 +26,7 @@ const int MAX_MEM = 3000;
 
 //SERVER VARIABLES
 
-const String SERVER_URL = "/samples";
+const String SERVER_URL = "/sample?";
 String host = "192.168.228.87";
 
 const int port = 3000;
