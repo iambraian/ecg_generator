@@ -13,7 +13,7 @@ const char *ssid = "wl-fmat-ccei";
 const char *password = "";
 
 //SAMPLING VARIABLES
-const int SAMPLE_PERIOD_MILLIS = 5;
+const int SAMPLE_PERIOD_MILLIS = 4;
 int captured_signals_counter = 0;
 const int SAMPLING_TIME_SEC = 20;
 const int MIN_YIELD_ITERS = 200;
