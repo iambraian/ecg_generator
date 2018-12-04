@@ -80,7 +80,14 @@ void upload_ramp_signal()
     send_counter++;
      if(ramp_counter >= spike_magnitude)
      { 
-        ramp_counter = 0;
+        if(ramp_counter == spike_magnitude)
+        {
+          ramp_counter == 150;
+        }
+        else
+        {
+          ramp_counter = 0;
+        }
      }
     if(ramp_counter < spike_magnitude/2)
      { 
@@ -120,9 +127,7 @@ String format_request(String body, String isLast)
   request.concat(quotationMark);
   request.concat(":");
   request.concat(quotationMark);
-  request.concat("[");
   request.concat(body);
-  request.concat("]");
   request.concat(quotationMark);
   request.concat(",");
   request.concat(quotationMark);
