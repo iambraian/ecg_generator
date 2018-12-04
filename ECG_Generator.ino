@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 
-const int NUM_GENERATED_SIGNALS = 3;
+const int NUM_GENERATED_SIGNALS = 1;
 int doomsday_counter = 0;
 const int DOOMSDAY = 50;
 
@@ -25,9 +25,11 @@ int BUFFER_SIZE = 0;
 const int MAX_MEM = 3000;
 
 //SERVER VARIABLES
-const String SERVER_URL = "/samples?";
-String host =  "192.168.228.216";
-const int port = 3003;
+
+const String SERVER_URL = "192.168.228.87/samples";
+String host = "192.168.228.87";
+
+const int port = 3000;
 
 
 void setup() 
@@ -89,7 +91,8 @@ void upload_ramp_signal()
      }
      if(send_counter == MAX_MEM)
      {
-        GET(buffer_, "false");
+        //GET(buffer_, "false");
+        POST(buffer_, "false");
         buffer_ = "";
         send_counter = 0;
      }
@@ -99,8 +102,8 @@ void upload_ramp_signal()
         yield();
      }
   }
-   //POST(buffer_, "true");
-    GET(buffer_, "true");
+    POST(buffer_, "true");
+    //GET(buffer_, "true");
 }
 
 
@@ -117,7 +120,9 @@ String format_request(String body, String isLast)
   request.concat(quotationMark);
   request.concat(":");
   request.concat(quotationMark);
+  request.concat("[");
   request.concat(body);
+  request.concat("]");
   request.concat(quotationMark);
   request.concat(",");
   request.concat(quotationMark);
@@ -202,7 +207,7 @@ void POST(String stored_data, String is_last)
         int begin_code = http.begin(SERVER_URL);
         Serial.println("begin= " + String(begin_code));
         http.addHeader("Content-Type", "text/plain");
-        int http_code = http.POST(format_request(stored_data, "false"));
+        int http_code = http.POST(format_request(stored_data, is_last));
         server_response = http.getString();
         http.end();
         Serial.println("Server response: " + server_response);
